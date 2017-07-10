@@ -11,7 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const appRotas: Routes = [
   {path: 'novo', component:FormUsuariosComponent},
-  {path: 'edicao/:ind', component:FormUsuariosComponent},
+  {path: 'edicao/:id', component:FormUsuariosComponent},
   {path: 'lista', component:TableUsuariosComponent},
   {path: '', redirectTo:'lista',pathMatch:'full'}
 ];

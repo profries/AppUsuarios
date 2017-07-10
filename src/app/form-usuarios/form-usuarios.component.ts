@@ -11,44 +11,45 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class FormUsuariosComponent implements OnInit {
   usuario:Usuario;
   erro: string;
-  indice: number;
+  idUsuario: number;
   constructor(private servico: UsuariosService ,
               private router: Router,
               private rota:ActivatedRoute) { 
   }
 
   ngOnInit() {
-    //this.indice = this.rota.snapshot.params['ind'];
+    this.idUsuario = this.rota.snapshot.params['id'];
 
-    //if(isNaN(this.indice)){
+    if(isNaN(this.idUsuario)){
       this.usuario = new Usuario();    
-    /*}
+    }
     else{
-      this.usuario = Object.assign({},
-          this.servico.getUsuario(this.indice));
-    }*/
-
-    
+      this.servico.getUsuario(this.idUsuario).subscribe(
+        data => this.usuario = data,
+        error => this.erro = error
+      )
+    }    
   }
 
   salvar(){
-    //if(isNaN(this.indice)){
+    if(isNaN(this.idUsuario)){
       console.log(this.usuario);
       this.servico.addUsuario(this.usuario).
         subscribe(
           usuario => this.router.navigate(['/lista']),
           error => this.erro = error
         );
-
+    }
 
       //this.usuario = new Usuario();    
    // }
-    /*else{
-      this.servico.atualizarUsuario(
-        this.indice,
-        this.usuario
+    else{
+      this.servico.atualizarUsuario(this.idUsuario,this.usuario)
+      .subscribe(
+        data => this.router.navigate(['/lista']),
+        error => this.erro = error
       );
-    }*/
+    }
         
   }
 

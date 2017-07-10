@@ -27,8 +27,12 @@ export class TableUsuariosComponent implements OnInit {
 
   }
 
-  excluirUsuario(indice:number){
-    this.servico.excluirUsuario(indice);
+
+  excluirUsuario(usuario:Usuario){
+    this.servico.excluirUsuario(usuario).subscribe(
+        data=> this.carregarLista(),
+        error => this.erro = error
+    );
   }
 
 }
